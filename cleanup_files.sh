@@ -20,7 +20,7 @@ if [ -z "$1" ]; then
     rm -r $loc_proofs/*
     rm -r $loc_running_scripts/*
     rm -r $loc_results/*
-    rm runtask.log
+    rm runtask_*.log
 else 
     rm -r $loc_outputs/$1
     rm -r $loc_proofs/$1

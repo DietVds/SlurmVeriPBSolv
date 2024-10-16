@@ -32,6 +32,8 @@ if [ "$build_veripb" == "yes" ]; then
     rm -rf VeriPB-master
 fi
 
+cd $loc_scripts
+
 # Start running
 parallel --delay 0.2 -j $SLURM_NTASKS --joblog runtask_$experiment_name.log --resume srun -N1 -n1 -c1 --exclusive ::: $(ls -1 $loc_running_scripts/$experiment_name/*.sh)
 wait
