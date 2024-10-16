@@ -14,7 +14,7 @@ EXECWITHOUTPL=""
 CHECKPROOF="no"
 CHECKPREVIOUSSTEP="no"
 
-CONFIGFILE="config.sh"
+CONFIGFILE="$(pwd)/config.sh"
 INSTANCES=""
 
 usage () {
@@ -66,7 +66,7 @@ if [ -z "$EXPERIMENTNAME" ]; then
 fi
 
 source $CONFIGFILE
-source load_modules.sh
+source $loc_scripts/load_modules.sh
 
 if [ -z $INSTANCES ]; then
     INSTANCES=$loc_instances

@@ -2,7 +2,7 @@
 configfile=CONFIGFILE
 
 source $configfile
-source load_modules.sh
+source $loc_scripts/load_modules.sh
 
 instances=INSTANCES
 filename=FILENAME
