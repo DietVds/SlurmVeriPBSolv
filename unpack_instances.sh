@@ -27,12 +27,12 @@ if [[ "$1" == "--help" ]]; then
 	exit 0
 fi
 
-loc_instances_archive=$1
-loc_instances=$2
+instances_archive=$1
+instances=$2
 
-unzip -j $loc_instances_archive -d $loc_instances 
+unzip -j $instances_archive -d $instances 
 
-cd $loc_instances
+cd $instances
 for filename in $(ls .) ; do 
    echo extracting file $filename
    instance=$(basename $filename .xz)
