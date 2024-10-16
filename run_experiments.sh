@@ -68,8 +68,8 @@ fi
 source $CONFIGFILE
 source load_modules.sh
 
-if [ -n $INSTANCES ]; then
-    loc_instances=$INSTANCES
+if [ -z $INSTANCES ]; then
+    INSTANCES=$loc_instances
 fi
 
 # Creating folders for the experiment
@@ -91,18 +91,21 @@ fi
 
 # Creating running scripts
 
-instances_escaped=$(sed 's;/;\\/;g' <<< "$loc_instances")
+instances_escaped=$(sed 's;/;\\/;g' <<< "$INSTANCES")
+configfile_escaped=$(sed 's;/;\\/;g' <<< "$CONFIGFILE")
+execwithoutpl_escaped=$(sed 's;/;\\/;g' <<< "$EXECWITHOUTPL")
+execwithpl_escaped=$(sed 's;/;\\/;g' <<< "$EXECWITHPL")
 
-for filename in $(ls "$loc_instances")
+for filename in $(ls "$INSTANCES")
 do 
     sed "s/TIME_L/$TIMELIMITEXP/g" single.sh > $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
     sed -i "s/MEM_L/$MEMLIMITEXP/g" $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
     sed -i "s/FILENAME/$filename/g" $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
-    sed -i "s/CONFIGFILE/$CONFIGFILE/g" $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
+    sed -i "s/CONFIGFILE/$configfile_escaped/g" $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
     sed -i "s/INSTANCES/$instances_escaped/g" $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
     sed -i "s/EXPNAME/$EXPERIMENTNAME/g" $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
-    sed -i "s/WITHOUTPL/$EXECWITHOUTPL/g" $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
-    sed -i "s/WITHPL/$EXECWITHPL/g" $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
+    sed -i "s/WITHOUTPL/$execwithoutpl_escaped/g" $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
+    sed -i "s/WITHPL/$execwithpl_escaped/g" $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
     sed -i "s/CHECKPROOF/$CHECKPROOF/g" $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
     sed -i "s/CHECKPREVIOUSSTEP/$CHECKPREVIOUSSTEP/g" $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
     chmod +x $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
@@ -124,6 +127,7 @@ echo "$resultheader" > $loc_results/resultheader_$EXPERIMENTNAME.txt
 # Create pbs and post the job by using sbatch.
 cp slurm_run.pbs $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
 sed -i "s/EXPNAME/$EXPERIMENTNAME/g" $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
+sed -i "s/CONFIGFILE/$CONFIGFILE/g" $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
 if [ $CHECKPROOF == "yes" ]; then
     sed -i "s/BUILDVERIPB/yes/g" $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
 else 
