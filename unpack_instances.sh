@@ -27,6 +27,10 @@ if [[ "$1" == "--help" ]]; then
 	exit 0
 fi
 
+if [[ ! -d $instances ]]; then
+   mkdir -p $instances
+fi
+
 instances_archive=$1
 instances=$2
 
