@@ -1,6 +1,6 @@
 HERE=$(pwd)
 
-loc_software=$VSC_DATA_VO_USER
+loc_software=$VSC_DATA_VO_USER/software
 loc_tools=$VSC_DATA_VO_USER/SlurmVeriPBSolv/tools
 loc_scripts=$VSC_DATA_VO_USER/SlurmVeriPBSolv
 
