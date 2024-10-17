@@ -1,4 +1,4 @@
-source config.sh
+source helper/config.sh
 
 usage () {
     cat << EOF
