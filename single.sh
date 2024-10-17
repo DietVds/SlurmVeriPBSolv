@@ -68,6 +68,11 @@ if [ -n "$script_with_PL" ] && ([ "$status_withoutPL" == "ok" ] || [ "$checkprev
   res_runtime_withPL=$(cat $loc_outputs/$experiment_name/${filename}_pl_out.txt | grep 'real:' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?');
   res_mem_withPL=$(cat $loc_outputs/$experiment_name/${filename}_pl_out.txt | grep 'space:' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?');
   status_withPL=$(cat $loc_outputs/$experiment_name/${filename}_pl_out.txt | grep 'status:' | awk '{print $3}');
+  res_proofsize=$(stat --printf="%s" $loc_proofs/$experiment_name/${filename}_proof.pbp)
+  if [[ "$res_proofsize" == "" ]] ;  then
+      res_proofsize=""
+  fi
+
 
   if grep -q "UNSATISFIABLE" $loc_outputs/$experiment_name/${filename}_pl_solveroutput.txt
   then
@@ -91,6 +96,7 @@ if [ "$checkproof" == "yes" ] && ([ "$status_withPL" == "ok" ] || [ "$checkprevi
   res_runtime_proofchecker=$(cat $loc_outputs/${filename}_verification.txt | grep 'real:' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?');
   res_mem_proofchecker=$(cat $loc_outputs/${filename}_verification.txt | grep 'space:' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?');
 
+
   if grep -q "succeeded" $loc_outputs/${filename}_veripb_output.txt; then
     res_proofcheck_succeeded=1
   else
@@ -108,7 +114,7 @@ if [ -n "$script_without_PL" ]; then
   resultline+=", $res_runtime_withoutPL, $res_mem_withoutPL, $answer_withoutPL"
 fi
 if [ -n "$script_with_PL" ]; then
-  resultline+=", $res_runtime_withPL, $res_mem_withPL, $answer_withPL"
+  resultline+=", $res_runtime_withPL, $res_mem_withPL, $answer_withPL, $res_proofsize"
 fi
 if [ "$checkproof" == "yes" ]; then
   resultline+=", $res_runtime_proofchecker, $res_mem_proofchecker, $res_proofcheck_succeeded"

@@ -117,7 +117,7 @@ if [ -n "$EXECWITHOUTPL" ]; then
   resultheader+=", runtime_withoutPL, mem_withoutPL, answer_withoutPL"
 fi
 if [ -n "$EXECWITHPL" ]; then
-  resultheader+=", runtime_withPL, mem_withPL, answer_withPL"
+  resultheader+=", runtime_withPL, mem_withPL, answer_withPL, proofsize"
 fi
 if [ "$CHECKPROOF" == "yes" ]; then
   resultheader+=", runtime_proofchecker, _mem_proofchecker, proofcheck_succeeded"
