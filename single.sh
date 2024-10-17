@@ -40,17 +40,17 @@ res_proofcheck_succeeded=""
 
 if [ -n $script_without_PL ]; then
   # run solver without prooflogging
-  $loc_bin/runlim -r $TIMEOUT_SOLVER -s $MEMOUT_SOLVER -o $loc_outputs/$experiment_name/${filename}_vanilla_out.txt $script_without_PL $instances/${filename}.${extension} > $loc_outputs/${filename}_vanilla_solveroutput.txt 2>&1
+  $loc_bin/runlim -r $TIMEOUT_SOLVER -s $MEMOUT_SOLVER -o $loc_outputs/$experiment_name/${filename}_vanilla_out.txt $script_without_PL $instances/${filename}.${extension} > $loc_outputs/$experiment_name/${filename}_vanilla_solveroutput.txt 2>&1
   
   # extract results
   res_runtime_withoutPL=$(cat $loc_outputs/$experiment_name/${filename}_vanilla_out.txt | grep 'real:' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?');
   res_mem_withoutPL=$(cat $loc_outputs/$experiment_name/${filename}_vanilla_out.txt | grep 'space:' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?');
   status_withoutPL=$(cat $loc_outputs/$experiment_name/${filename}_vanilla_out.txt | grep 'status:' | awk '{print $3}');
 
-  if grep -q "UNSATISFIABLE" $loc_outputs/${filename}_vanilla_solveroutput.txt
+  if grep -q "UNSATISFIABLE" $loc_outputs/$experiment_name/${filename}_vanilla_solveroutput.txt
   then
     answer_withoutPL="UNSAT"
-  elif grep -q "OPTIMUM FOUND" $loc_outputs/${filename}_vanilla_solveroutput.txt
+  elif grep -q "OPTIMUM FOUND" $loc_outputs/$experiment_name/${filename}_vanilla_solveroutput.txt
   then
     answer_withoutPL="SAT"
   else
@@ -62,7 +62,7 @@ fi
 
 if [ -n $script_with_PL ] && ([ "$status_withoutPL" == ok ] || [ $checkpreviousstep == false ]); then
   # run solver with prooflogging
-  $loc_bin/runlim -r $TIMEOUT_SOLVER -s $MEMOUT_SOLVER -o $loc_outputs/$experiment_name/${filename}_pl_out.txt $script_with_PL $instances/${filename}.${extension} $loc_proofs/$experiment_name/${filename}_proof.pbp > $loc_outputs/${filename}_pl_solveroutput.txt 2>&1
+  $loc_bin/runlim -r $TIMEOUT_SOLVER -s $MEMOUT_SOLVER -o $loc_outputs/$experiment_name/${filename}_pl_out.txt $script_with_PL $instances/${filename}.${extension} $loc_proofs/$experiment_name/${filename}_proof.pbp > $loc_outputs/$experiment_name/${filename}_pl_solveroutput.txt 2>&1
   
   # extract results
   res_runtime_withPL=$(cat $loc_outputs/$experiment_name/${filename}_pl_out.txt | grep 'real:' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?');
@@ -113,8 +113,8 @@ fi
 if [ $checkproof == "yes" ]; then
   resultline+=", $res_runtime_proofchecker, $res_mem_proofchecker, $res_proofcheck_succeeded"
 fi
-echo "$resultline" >> $loc_results/"$filename"_result.csv
+echo "$resultline" >> $loc_results/$experiment_name/"$filename"_result.csv
 
 # rm $loc_outputs/${filename}*
-rm $loc_proofs/${filename}*
-rm $loc_running_scripts/${filename}*
+rm $loc_proofs/$experiment_name/${filename}*
+rm $loc_running_scripts/$experiment_name/${filename}*
