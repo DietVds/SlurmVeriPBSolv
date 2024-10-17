@@ -5,7 +5,7 @@ experiment_name=EXPNAME
 build_veripb=BUILDVERIPB
 
 source $configfile
-source $loc_scripts/load_modules.sh
+source $loc_scripts/helper/load_modules.sh
 
 #Building runlim
 echo Building runlim...

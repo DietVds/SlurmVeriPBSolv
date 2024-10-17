@@ -14,7 +14,7 @@ EXECWITHOUTPL=""
 CHECKPROOF="no"
 CHECKPREVIOUSSTEP="no"
 
-CONFIGFILE="$(pwd)/config.sh"
+CONFIGFILE="$(pwd)/helper/config.sh"
 INSTANCES=""
 
 usage () {
@@ -29,7 +29,7 @@ where '<option>' is one of the following
 --experiment-name       name of the experiment 
 --mailtype              send mails for changes in status. Possible values: NONE, BEGIN, END, FAIL, INVALID_DEPEND, REQUEUE, and STAGE_OUT - Default: NONE
 --partition             partition on which the job needs to be run. Default: zen4.
---configfile            location of the configfile. Default: config.sh
+--configfile            location of the configfile. Default: helper/config.sh
 --instances             location of the instances. Default: variable loc_instances in config file.
 
 --exec-without-PL       executable that runs the solver without proof logging. The first argument should be the input instance.
@@ -66,7 +66,7 @@ if [ -z "$EXPERIMENTNAME" ]; then
 fi
 
 source $CONFIGFILE
-source $loc_scripts/load_modules.sh
+source $loc_scripts/helper/load_modules.sh
 
 if [ -z $INSTANCES ]; then
     INSTANCES=$loc_instances
@@ -98,7 +98,7 @@ execwithpl_escaped=$(sed 's;/;\\/;g' <<< "$EXECWITHPL")
 
 for filename in $(ls "$INSTANCES")
 do 
-    sed "s/TIME_L/$TIMELIMITEXP/g" single.sh > $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
+    sed "s/TIME_L/$TIMELIMITEXP/g" helper/single.sh > $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
     sed -i "s/MEM_L/$MEMLIMITEXP/g" $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
     sed -i "s/FILENAME/$filename/g" $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
     sed -i "s/CONFIGFILE/$configfile_escaped/g" $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
@@ -125,7 +125,7 @@ fi
 echo "$resultheader" > $loc_results/resultheader_$EXPERIMENTNAME.txt
 
 # Create pbs and post the job by using sbatch.
-cp slurm_run.pbs $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
+cp helper/slurm_run.pbs $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
 sed -i "s/EXPNAME/$EXPERIMENTNAME/g" $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
 sed -i "s/CONFIGFILE/$configfile_escaped/g" $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
 if [ "$CHECKPROOF" == "yes" ]; then
