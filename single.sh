@@ -104,13 +104,13 @@ if [ "$checkproof" == "yes" ] && ([ "$status_withPL" == "ok" ] || [ "$checkprevi
 fi
 
 resultline="$filename"
-if [ -n $script_without_PL ]; then
+if [ -n "$script_without_PL" ]; then
   resultline+=", $res_runtime_withoutPL, $res_mem_withoutPL, $answer_withoutPL"
 fi
-if [ -n $script_with_PL ]; then
+if [ -n "$script_with_PL" ]; then
   resultline+=", $res_runtime_withPL, $res_mem_withPL, $answer_withPL"
 fi
-if [ $checkproof == "yes" ]; then
+if [ "$checkproof" == "yes" ]; then
   resultline+=", $res_runtime_proofchecker, $res_mem_proofchecker, $res_proofcheck_succeeded"
 fi
 echo "$resultline" >> $loc_results/$experiment_name/"$filename"_result.csv
