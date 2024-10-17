@@ -114,13 +114,13 @@ done
 # Create experiment header.
 resultheader="instance"
 if [ -n $EXECWITHOUTPL ]; then
-  resultheader+=", $res_runtime_withoutPL, $res_mem_withoutPL, $answer_withoutPL"
+  resultheader+=", runtime_withoutPL, mem_withoutPL, answer_withoutPL"
 fi
 if [ -n $EXECWITHPL ]; then
-  resultheader+=", $res_runtime_withPL, $res_mem_withPL, $answer_withPL"
+  resultheader+=", runtime_withPL, mem_withPL, answer_withPL"
 fi
 if [ $CHECKPROOF == "yes" ]; then
-  resultheader+=", $res_runtime_proofchecker, $res_mem_proofchecker, $res_proofcheck_succeeded"
+  resultheader+=", runtime_proofchecker, _mem_proofchecker, proofcheck_succeeded"
 fi
 echo "$resultheader" > $loc_results/resultheader_$EXPERIMENTNAME.txt
 

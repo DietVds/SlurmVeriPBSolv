@@ -69,10 +69,10 @@ if [ -n $script_with_PL ] && ([ "$status_withoutPL" == ok ] || [ $checkpreviouss
   res_mem_withPL=$(cat $loc_outputs/$experiment_name/${filename}_pl_out.txt | grep 'space:' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?');
   status_withPL=$(cat $loc_outputs/$experiment_name/${filename}_pl_out.txt | grep 'status:' | awk '{print $3}');
 
-  if grep -q "UNSATISFIABLE" $loc_outputs/${filename}_pl_solveroutput.txt
+  if grep -q "UNSATISFIABLE" $loc_outputs/$experiment_name/${filename}_pl_solveroutput.txt
   then
     answer_withPL="UNSAT"
-  elif grep -q "OPTIMUM FOUND" $loc_outputs/${filename}_pl_solveroutput.txt
+  elif grep -q "OPTIMUM FOUND" $loc_outputs/$experiment_name/${filename}_pl_solveroutput.txt
   then
     answer_withPL="SAT"
   else
