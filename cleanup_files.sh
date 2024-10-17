@@ -23,7 +23,7 @@ if [ "$1" == "--help" ]; then
     exit 0
 fi
 
-if [ "$1" ==  "--all"]; then
+if [ "$1" ==  "--all" ]; then
     rm -r $loc_outputs/*
     rm -r $loc_proofs/*
     rm -r $loc_running_scripts/*
