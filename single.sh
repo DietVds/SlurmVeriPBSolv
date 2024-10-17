@@ -38,7 +38,7 @@ res_runtime_proofchecker=""
 res_mem_proofchecker=""
 res_proofcheck_succeeded=""
 
-if [ -n $script_without_PL ]; then
+if [ -n "$script_without_PL" ]; then
   # run solver without prooflogging
   $loc_bin/runlim -r $TIMEOUT_SOLVER -s $MEMOUT_SOLVER -o $loc_outputs/$experiment_name/${filename}_vanilla_out.txt $script_without_PL $instances/${filename}.${extension} > $loc_outputs/$experiment_name/${filename}_vanilla_solveroutput.txt 2>&1
   
@@ -60,7 +60,7 @@ else
   status_withoutPL=ok
 fi
 
-if [ -n $script_with_PL ] && ([ "$status_withoutPL" == ok ] || [ $checkpreviousstep == false ]); then
+if [ -n "$script_with_PL" ] && ([ "$status_withoutPL" == "ok" ] || [ "$checkpreviousstep" == "no" ]); then
   # run solver with prooflogging
   $loc_bin/runlim -r $TIMEOUT_SOLVER -s $MEMOUT_SOLVER -o $loc_outputs/$experiment_name/${filename}_pl_out.txt $script_with_PL $instances/${filename}.${extension} $loc_proofs/$experiment_name/${filename}_proof.pbp > $loc_outputs/$experiment_name/${filename}_pl_solveroutput.txt 2>&1
   
@@ -82,7 +82,7 @@ else
   status_withPL=ok
 fi
 
-if [ $checkproof == "yes" ] && ([ "$status_withPL" == ok ] || [ $checkpreviousstep == false ]); then
+if [ "$checkproof" == "yes" ] && ([ "$status_withPL" == "ok" ] || [ "$checkpreviousstep" == "no" ]); then
   # run proof checker
   source $loc_bin/pyenv/bin/activate
   $loc_bin/runlim -r $TIMEOUT_VERIPB -s $MEMOUT_VERIPB -o $loc_outputs/${filename}_verification.txt python -m veripb --checkDeletion --wcnf $instances/${filename}.${extension} $loc_proofs/${filename}_proof.pbp > $loc_outputs/${filename}_veripb_output.txt 2>&1

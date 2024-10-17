@@ -113,13 +113,13 @@ done
 
 # Create experiment header.
 resultheader="instance"
-if [ -n $EXECWITHOUTPL ]; then
+if [ -n "$EXECWITHOUTPL" ]; then
   resultheader+=", runtime_withoutPL, mem_withoutPL, answer_withoutPL"
 fi
-if [ -n $EXECWITHPL ]; then
+if [ -n "$EXECWITHPL" ]; then
   resultheader+=", runtime_withPL, mem_withPL, answer_withPL"
 fi
-if [ $CHECKPROOF == "yes" ]; then
+if [ "$CHECKPROOF" == "yes" ]; then
   resultheader+=", runtime_proofchecker, _mem_proofchecker, proofcheck_succeeded"
 fi
 echo "$resultheader" > $loc_results/resultheader_$EXPERIMENTNAME.txt
@@ -128,7 +128,7 @@ echo "$resultheader" > $loc_results/resultheader_$EXPERIMENTNAME.txt
 cp slurm_run.pbs $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
 sed -i "s/EXPNAME/$EXPERIMENTNAME/g" $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
 sed -i "s/CONFIGFILE/$configfile_escaped/g" $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
-if [ $CHECKPROOF == "yes" ]; then
+if [ "$CHECKPROOF" == "yes" ]; then
     sed -i "s/BUILDVERIPB/yes/g" $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
 else 
     sed -i "s/BUILDVERIPB/no/g" $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
