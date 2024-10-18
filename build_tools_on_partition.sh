@@ -22,4 +22,4 @@ if [ "$1" == "--help" ]; then
     exit 0
 fi
 
-sbatch --job-name=BUILD --ntasks=1 --partition=$1 --cpus-per-task=1  --mail-type=$MAILTYPE build_tools.sh
+sbatch --job-name=BUILD --ntasks=1 --partition=$1 --cpus-per-task=1  build_tools.sh
