@@ -90,7 +90,7 @@ fi
 if [ "$checkproof" == "yes" ] && ([ "$status_withPL" == "ok" ] || [ "$checkpreviousstep" == "no" ]); then
   # run proof checker
   source $loc_bin/pyenv/bin/activate
-  $loc_bin/runlim -r $TIMEOUT_VERIPB -s $MEMOUT_VERIPB -o $loc_outputs/${filename}_verification.txt python -m veripb --checkDeletion --wcnf $instances/${filename}.${extension} $loc_proofs/${filename}_proof.pbp > $loc_outputs/${filename}_veripb_output.txt 2>&1
+  $loc_bin/runlim -r $TIMEOUT_VERIPB -s $MEMOUT_VERIPB -o $loc_outputs/${filename}_verification.txt python -m veripb --checkDeletion --wcnf $instances/${filename}.${extension} $loc_proofs/$experiment_name/${filename}_proof.pbp > $loc_outputs/${filename}_veripb_output.txt 2>&1
 
   # extract results
   res_runtime_proofchecker=$(cat $loc_outputs/${filename}_verification.txt | grep 'real:' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?');
