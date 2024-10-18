@@ -23,6 +23,8 @@ source $loc_bin/pyenv/bin/activate
 python3 -m pip install --upgrade pip
 python3 -m pip install --upgrade setuptools
 cd $loc_tools
-unzip VeriPB.zip
-python3 -m pip install VeriPB-master/
-rm -rf VeriPB-master
+git clone git@gitlab.com:MIAOresearch/software/VeriPB.git
+cd ./VeriPB
+pip3 install --user ./
+cd $loc_tools 
+rm -rf VeriPB
