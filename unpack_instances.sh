@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source config.sh
-
 usage () {
 cat << EOF
 usage: ./run_experiments.sh <instances_archive> <out>
