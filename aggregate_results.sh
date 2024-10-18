@@ -30,6 +30,6 @@ fi
 
 source helper/config.sh
 #TODO: Use the file $loc_results/resultheader_$EXPERIMENTNAME.txt
-cat $loc_results/resultheader_$EXPERIMENTNAME.txt > $outfile
+cat $loc_results/resultheader_$experiment_name.txt > $outfile
 cat $loc_results/$experiment_name/* >> $outfile
 echo "Results can be found at: $outfile"

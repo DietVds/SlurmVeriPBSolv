@@ -24,6 +24,7 @@ python3 -m pip install --upgrade pip
 python3 -m pip install --upgrade setuptools
 cd $loc_tools
 git clone git@gitlab.com:MIAOresearch/software/VeriPB.git
-python3 -m pip install VeriPB-master/
+cd VeriPB
+python3 -m pip install .
 cd $loc_tools 
 rm -rf VeriPB
