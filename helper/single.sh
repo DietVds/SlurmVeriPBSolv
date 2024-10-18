@@ -90,14 +90,14 @@ fi
 if [ "$checkproof" == "yes" ] && ([ "$status_withPL" == "ok" ] || [ "$checkpreviousstep" == "no" ]); then
   # run proof checker
   source $loc_bin/pyenv/bin/activate
-  $loc_bin/runlim -r $TIMEOUT_VERIPB -s $MEMOUT_VERIPB -o $loc_outputs/${filename}_verification.txt python -m veripb --checkDeletion --wcnf $instances/${filename}.${extension} $loc_proofs/$experiment_name/${filename}_proof.pbp > $loc_outputs/${filename}_veripb_output.txt 2>&1
+  $loc_bin/runlim -r $TIMEOUT_VERIPB -s $MEMOUT_VERIPB -o $loc_outputs/$experiment_name/${filename}_verification.txt python -m veripb --checkDeletion --wcnf $instances/${filename}.${extension} $loc_proofs/$experiment_name/${filename}_proof.pbp > $loc_outputs/$experiment_name/${filename}_veripb_output.txt 2>&1
 
   # extract results
-  res_runtime_proofchecker=$(cat $loc_outputs/${filename}_verification.txt | grep 'real:' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?');
-  res_mem_proofchecker=$(cat $loc_outputs/${filename}_verification.txt | grep 'space:' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?');
+  res_runtime_proofchecker=$(cat $loc_outputs/$experiment_name/${filename}_verification.txt | grep 'real:' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?');
+  res_mem_proofchecker=$(cat $loc_outputs/$experiment_name/${filename}_verification.txt | grep 'space:' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?');
 
 
-  if grep -q "succeeded" $loc_outputs/${filename}_veripb_output.txt; then
+  if grep -q "succeeded" $loc_outputs/$experiment_name/${filename}_veripb_output.txt; then
     res_proofcheck_succeeded=1
   else
         res_proofcheck_succeeded=0	
