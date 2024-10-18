@@ -128,10 +128,5 @@ echo "$resultheader" > $loc_results/resultheader_$EXPERIMENTNAME.txt
 cp helper/slurm_run.pbs $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
 sed -i "s/EXPNAME/$EXPERIMENTNAME/g" $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
 sed -i "s/CONFIGFILE/$configfile_escaped/g" $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
-if [ "$CHECKPROOF" == "yes" ]; then
-    sed -i "s/BUILDVERIPB/yes/g" $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
-else 
-    sed -i "s/BUILDVERIPB/no/g" $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
-fi
 sbatch --job-name=$JOBNAME --time=$TIMELIMIT --ntasks=$NTASKS --partition=$PARTITION --cpus-per-task=$CPUSPERTASK --mem-per-cpu=$MEMPERCPU --mail-type=$MAILTYPE $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
 
