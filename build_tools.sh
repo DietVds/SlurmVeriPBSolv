@@ -1,5 +1,20 @@
 #!/bin/bash
 
+usage () {
+    cat << EOF
+usage: ./build_tools.sh [--help]
+
+This script builds runlim and VeriPB for running experiments.
+
+--help              print this help page
+EOF
+}
+
+if [ -n "$1" ] && [ "$1" == "--help" ]; then 
+    usage 
+    exit 0
+fi
+
 source helper/config.sh
 source helper/load_modules.sh
 
