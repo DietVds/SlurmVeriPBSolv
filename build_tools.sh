@@ -2,9 +2,10 @@
 
 usage () {
     cat << EOF
-usage: ./build_tools.sh [--help]
 
 This script builds runlim and VeriPB for running experiments.
+
+usage: ./build_tools.sh [--help]
 
 --help              print this help page
 EOF

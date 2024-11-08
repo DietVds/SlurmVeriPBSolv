@@ -2,6 +2,9 @@
 
 usage () {
     cat << EOF
+
+This script runs the build_tools.sh script on a specific partition.
+
 usage: ./build_tools_on_partition.sh <option>
 
 where <option> can be 
