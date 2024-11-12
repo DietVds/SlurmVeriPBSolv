@@ -120,7 +120,7 @@ if [ -n "$EXECWITHPL" ]; then
   resultheader+=", runtime_withPL, mem_withPL, answer_withPL, proofsize"
 fi
 if [ "$CHECKPROOF" == "yes" ]; then
-  resultheader+=", runtime_proofchecker, _mem_proofchecker, proofcheck_succeeded"
+  resultheader+=", runtime_proofchecker, mem_proofchecker, proofcheck_succeeded"
 fi
 echo "$resultheader" > $loc_results/resultheader_$EXPERIMENTNAME.txt
 
