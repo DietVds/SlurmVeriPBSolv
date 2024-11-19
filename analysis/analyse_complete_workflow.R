@@ -23,6 +23,7 @@ if(length(args) >= 1 && args[1] == "--help"){
                "Rscript --vanilla analyse_complete_workflow.R <data> <output-dir> <experiment-name>",
                "with ",
                "    <data> the csv-file containing all the data (should be executed with run_experiments-script and contain all three phases).",
+               "    <output-dir> the location where the results will be stored. Note: Directory needs to exist.",
                "    <experiment-name> name of the experiment, as to make clear name."))
   quit()
 }
