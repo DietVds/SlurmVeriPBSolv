@@ -86,6 +86,8 @@ if [ -n "$script_with_PL" ] && ([ "$status_withoutPL" == "ok" ] || [ "$checkprev
   else
     answer_withPL="NONE"
   fi
+elif [ "$status_withoutPL" != "ok" ]; then
+  status_withPL=$status_withoutPL
 else 
   status_withPL=ok
 fi
