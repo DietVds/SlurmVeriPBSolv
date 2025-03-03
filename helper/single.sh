@@ -40,7 +40,7 @@ res_proofcheck_succeeded=""
 
 # Read the instance once, to not have overhead in the parsing for the first solver call.
 instance=/dev/shm/${filename}.${extension}
-cp $instance $instance
+cp $instances/${filename}.${extension} $instance
 
 if [ -n "$script_without_PL" ]; then
   # run solver without prooflogging
