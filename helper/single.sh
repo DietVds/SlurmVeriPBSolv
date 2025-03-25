@@ -130,13 +130,13 @@ resultline="$filename"
 if [ -n "$script_without_PL" ]; then
   resultline+=", $res_runtime_withoutPL, $res_mem_withoutPL, $answer_withoutPL"
   if [ -n "$script_calculate_checksum" ]; then
-    resultline+=",checksum_withoutPL"
+    resultline+=", $checksum_withoutPL"
   fi
 fi
 if [ -n "$script_with_PL" ]; then
   resultline+=", $res_runtime_withPL, $res_mem_withPL, $answer_withPL, $res_proofsize"
   if [ -n "$script_calculate_checksum" ]; then
-    resultline+=",checksum_withPL"
+    resultline+=", $checksum_withPL"
   fi
 fi
 if [ "$checkproof" == "yes" ]; then

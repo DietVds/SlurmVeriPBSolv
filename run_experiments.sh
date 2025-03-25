@@ -123,7 +123,7 @@ resultheader="instance"
 if [ -n "$EXECWITHOUTPL" ]; then
   resultheader+=", runtime_withoutPL, mem_withoutPL, answer_withoutPL"
   if [ -n "$CALCULATECHECKSUM" ]; then
-    resultheader+=",checksum_withoutPL"
+    resultheader+=", checksum_withoutPL"
   fi
 fi
 if [ -n "$EXECWITHPL" ]; then
