@@ -99,6 +99,7 @@ instances_escaped=$(sed 's;/;\\/;g' <<< "$INSTANCES")
 configfile_escaped=$(sed 's;/;\\/;g' <<< "$CONFIGFILE")
 execwithoutpl_escaped=$(sed 's;/;\\/;g' <<< "$EXECWITHOUTPL")
 execwithpl_escaped=$(sed 's;/;\\/;g' <<< "$EXECWITHPL")
+checksumscript_escaped=$(sed 's;/;\\/;g' <<< "$CALCULATECHECKSUM")
 
 #TODO: add checksum calculation
 for filename in $(ls "$INSTANCES")
@@ -113,7 +114,7 @@ do
     sed -i "s/WITHPL/$execwithpl_escaped/g" $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
     sed -i "s/CHECKPROOF/$CHECKPROOF/g" $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
     sed -i "s/CHECKPREVIOUSSTEP/$CHECKPREVIOUSSTEP/g" $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
-    sed -i "s/CALCULATECHECKSUM/$CALCULATECHECKSUM/g" $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
+    sed -i "s/CALCULATECHECKSUM/$checksumscript_escaped/g" $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
     chmod +x $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
 done
 
