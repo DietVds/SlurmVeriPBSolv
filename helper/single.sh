@@ -22,6 +22,7 @@ experiment_name=EXPNAME
 
 script_without_PL=WITHOUTPL
 script_with_PL=WITHPL
+script_calculate_checksum=CALCULATECHECKSUM
 checkproof=CHECKPROOF
 checkpreviousstep=CHECKPREVIOUSSTEP
 
@@ -29,11 +30,13 @@ res_runtime_withoutPL=""
 res_mem_withoutPL=""
 answer_withoutPL=""
 status_withoutPL=""
+checksum_withoutPL=""
 res_proofsize=""
 res_runtime_withPL=""
 res_mem_withPL=""
 answer_withPL=""
 status_withPL=""
+checksum_withPL=""
 res_runtime_proofchecker=""
 res_mem_proofchecker=""
 res_proofcheck_succeeded=""
@@ -59,6 +62,10 @@ if [ -n "$script_without_PL" ]; then
     answer_withoutPL="SAT"
   else
     answer_withoutPL="NONE"
+  fi
+
+  if [ -n "$script_calculate_checksum" ]; then
+    checksum_withoutPL=$($script_calculate_checksum $loc_outputs/$experiment_name/${filename}_vanilla_solveroutput.txt)
   fi
 else 
   status_withoutPL=ok
@@ -86,6 +93,10 @@ if [ -n "$script_with_PL" ] && ([ "$status_withoutPL" == "ok" ] || [ "$checkprev
     answer_withPL="SAT"
   else
     answer_withPL="NONE"
+  fi
+
+  if [ -n "$script_calculate_checksum" ]; then
+    checksum_withPL=$($script_calculate_checksum $loc_outputs/$experiment_name/${filename}_vanilla_solveroutput.txt)
   fi
 elif [ "$status_withoutPL" != "ok" ]; then
   status_withPL="notok"
@@ -118,9 +129,15 @@ fi
 resultline="$filename"
 if [ -n "$script_without_PL" ]; then
   resultline+=", $res_runtime_withoutPL, $res_mem_withoutPL, $answer_withoutPL"
+  if [ -n "$script_calculate_checksum" ]; then
+    resultline+=",checksum_withoutPL"
+  fi
 fi
 if [ -n "$script_with_PL" ]; then
   resultline+=", $res_runtime_withPL, $res_mem_withPL, $answer_withPL, $res_proofsize"
+  if [ -n "$script_calculate_checksum" ]; then
+    resultline+=",checksum_withPL"
+  fi
 fi
 if [ "$checkproof" == "yes" ]; then
   resultline+=", $res_runtime_proofchecker, $res_mem_proofchecker, $res_proofcheck_succeeded"
