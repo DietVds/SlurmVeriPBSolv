@@ -109,6 +109,8 @@ ggplot(solved_by_solver_withoutPL, aes(x = runtime_withPL, y = runtime_withoutPL
   coord_fixed(ratio = 1) +
   geom_vline(xintercept = 4000, linetype = "dashed") +
   geom_vline(xintercept = 8500, linetype = "dashed") +
+  geom_hline(yintercept = 4000, linetype = "dashed") +
+  geom_hline(yintercept = 8500, linetype = "dashed") +
   geom_abline(slope = 1, intercept = 0, linetype = "dashed") +
   #labs(color = "Proofsize") +
   xlab("Solving with PL  (time in s)") +
@@ -129,6 +131,24 @@ ggplot(solved_by_solver_withoutPL, aes(x = runtime_withPL, y = runtime_withoutPL
     x = 9100,
     y = 0.081,
     angle = 90,
+    vjust = 1,
+    size = 2
+  ) + 
+  annotate(
+    geom = "text",
+    label = "OoT",
+    y = 5000,
+    x = 0.081,
+    angle = 0,
+    vjust = 1,
+    size = 2
+  ) +
+  annotate(
+    geom = "text",
+    label = "OoM",
+    y = 10000,
+    x = 0.081,
+    angle = 0,
     vjust = 1,
     size = 2
   )
