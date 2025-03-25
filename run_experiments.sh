@@ -58,7 +58,7 @@ do
     --exec-with-PL=*) EXECWITHPL="`expr \"$1\" : '--exec-with-PL=\(.*\)'`";;
     --check-proof) CHECKPROOF="yes";;
     --check-previous-step) CHECKPREVIOUSSTEP="yes";;
-    --calculate-checksum-solveroutput) CALCULATECHECKSUM="`expr \"$1\" : '--calculate-checksum-solveroutput=\(.*\)'`";;
+    --calculate-checksum-solveroutput=*) CALCULATECHECKSUM="`expr \"$1\" : '--calculate-checksum-solveroutput=\(.*\)'`";;
   esac
   shift
 done
