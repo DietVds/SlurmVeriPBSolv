@@ -96,7 +96,7 @@ if [ -n "$script_with_PL" ] && ([ "$status_withoutPL" == "ok" ] || [ "$checkprev
   fi
 
   if [ -n "$script_calculate_checksum" ]; then
-    checksum_withPL=$($script_calculate_checksum $loc_outputs/$experiment_name/${filename}_vanilla_solveroutput.txt)
+    checksum_withPL=$($script_calculate_checksum $loc_outputs/$experiment_name/${filename}_pl_solveroutput.txt)
   fi
 elif [ "$status_withoutPL" != "ok" ]; then
   status_withPL="notok"
