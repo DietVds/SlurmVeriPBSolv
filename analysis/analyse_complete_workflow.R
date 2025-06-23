@@ -242,6 +242,7 @@ verif.success <- length(which(data$proofcheck_succeeded == 1))
 verif.failed <-length(which(data$runtime_proofchecker < 10*time_limit & data$proofcheck_succeeded == 0))
 verif.oot <- length(which(data$runtime_proofchecker == 46000))
 verif.oom <- length(which(data$runtime_proofchecker == 99000))
+verif.checksum_failed <- length(which(data$checksum_withoutPL != data$checksum_withPL))
 
 solverpl.slowdown <- round(median(solved_by_solver_withPL$runtime_withPL/solved_by_solver_withPL$runtime_withoutPL, na.rm = TRUE), digits=2)
 solverpl.memoryoverhead <- round(median(solved_by_solver_withPL$mem_withPL/solved_by_solver_withPL$mem_withoutPL, na.rm = TRUE), digits=2)
@@ -268,6 +269,7 @@ text.results <- c(text.results, paste("OoT Verification: " , verif.oot))
 text.results <- c(text.results, paste("OoM Verification: ", verif.oom))
 text.results <- c(text.results, paste("Median slowdown Verification: " , verif.slowdown))
 text.results <- c(text.results, paste("90th Quantile slowdown Verification: " , verif.90thquantile))
+text.results <- c(text.results, paste("Instances checksum failed: ", verif.checksum_failed))
 
 writeLines(text.results, resultfile)
 
