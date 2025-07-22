@@ -45,6 +45,9 @@ res_proofcheck_succeeded=""
 instance=/dev/shm/${filename}.${extension}
 cp $instances/${filename}.${extension} $instance
 
+# Read the instance once, to not have overhead in the parsing for the first solver call.
+cat $instance > /dev/null
+
 if [ -n "$script_without_PL" ]; then
   # run solver without prooflogging
   $loc_bin/runlim -r $TIMEOUT_SOLVER -s $MEMOUT_SOLVER -o $loc_outputs/$experiment_name/${filename}_vanilla_out.txt $script_without_PL $instance > $loc_outputs/$experiment_name/${filename}_vanilla_solveroutput.txt 2>&1
