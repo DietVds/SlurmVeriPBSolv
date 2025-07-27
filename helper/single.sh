@@ -42,8 +42,7 @@ res_mem_proofchecker=""
 res_proofcheck_succeeded=""
 
 # Read the instance once, to not have overhead in the parsing for the first solver call.
-instance=/dev/shm/${filename}.${extension}
-cp $instances/${filename}.${extension} $instance
+instance=$instances/${filename}.${extension}
 
 # Read the instance once, to not have overhead in the parsing for the first solver call.
 cat $instance > /dev/null
