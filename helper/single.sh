@@ -147,6 +147,5 @@ fi
 echo "$resultline" >> $loc_results/$experiment_name/"$filename"_result.csv
 
 # rm $loc_outputs/${filename}*
-rm $instance
 rm $loc_proofs/$experiment_name/${filename}*
 rm $loc_running_scripts/$experiment_name/${filename}*
