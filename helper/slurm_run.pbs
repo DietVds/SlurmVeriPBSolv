@@ -7,5 +7,5 @@ source $configfile
 source $loc_scripts/helper/load_modules.sh
 
 # Start running
-parallel --delay 0.2 -j $SLURM_NTASKS --joblog runtask_$experiment_name.log --resume srun -N1 -n1 -c1 --exclusive ::: $(ls -1 $loc_running_scripts/$experiment_name/*.sh)
+parallel --delay 0.2 -j $SLURM_NTASKS --joblog $loc_outputs/$experiment_name/runtask.log --resume srun -N1 -n1 -c1 --exclusive ::: $(ls -1 $loc_running_scripts/$experiment_name/*.sh)
 wait

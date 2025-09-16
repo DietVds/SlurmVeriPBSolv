@@ -141,5 +141,5 @@ echo "$resultheader" > $loc_results/resultheader_$EXPERIMENTNAME.txt
 cp helper/slurm_run.pbs $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
 sed -i "s/EXPNAME/$EXPERIMENTNAME/g" $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
 sed -i "s/CONFIGFILE/$configfile_escaped/g" $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
-sbatch --job-name=$JOBNAME --time=$TIMELIMIT --ntasks=$NTASKS --partition=$PARTITION --cpus-per-task=$CPUSPERTASK --mem-per-cpu=$MEMPERCPU --mail-type=$MAILTYPE $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
+sbatch --job-name=$JOBNAME --output=$loc_outputs/$EXPERIMENTNAME/slurm_out.txt --error=$loc_outputs/$EXPERIMENTNAME/slurm_out.txt --time=$TIMELIMIT --ntasks=$NTASKS --partition=$PARTITION --cpus-per-task=$CPUSPERTASK --mem-per-cpu=$MEMPERCPU --mail-type=$MAILTYPE $loc_running_scripts/slurm_run_$EXPERIMENTNAME.pbs
 
