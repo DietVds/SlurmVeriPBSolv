@@ -20,27 +20,22 @@ source helper/config.sh
 source helper/load_modules.sh
 
 #Building runlim
-rm $loc_bin/runlim
 echo Building runlim...
-cd $loc_tools
-tar -xf runlim-1.10.tar.gz
-cd runlim-1.10
+rm $loc_bin/runlim
+git clone https://github.com/arminbiere/runlim.git
+cd runlim
 ./configure.sh && make
-mv runlim $loc_bin
-cd $loc_tools
+cd ..
 rm -rf runlim-1.10
-echo Finished building runlim
+echo Done building runlim
 
-#Building VeriPB if necessary
-rm -rf $loc_bin/pyenv
-# virtualenv --system-site-packages $loc_bin/pyenv
-virtualenv $loc_bin/pyenv
-source $loc_bin/pyenv/bin/activate
-python3 -m pip install --upgrade pip
-python3 -m pip install --upgrade setuptools
-cd $loc_tools
+#Building VeriPB
+echo Builing VeriPB..
+module load Rust/1.91.1-GCCcore-14.2.0
 git clone git@gitlab.com:MIAOresearch/software/VeriPB.git
 cd VeriPB
-python3 -m pip install .
-cd $loc_tools 
+cargo install --path .
+cp $VSC_HOME/.cargo/bin/veripb $loc_bin
+cd ..
 rm -rf VeriPB
+echo Done building VeriPB
