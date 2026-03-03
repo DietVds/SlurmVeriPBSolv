@@ -102,7 +102,7 @@ execwithpl_escaped=$(sed 's;/;\\/;g' <<< "$EXECWITHPL")
 checksumscript_escaped=$(sed 's;/;\\/;g' <<< "$CALCULATECHECKSUM")
 
 #TODO: add checksum calculation
-for filename in $(ls "$INSTANCES")
+for filename in $(find "$INSTANCES" -type f)
 do 
     sed "s/TIME_L/$TIMELIMITEXP/g" helper/single.sh > $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
     sed -i "s/MEM_L/$MEMLIMITEXP/g" $loc_running_scripts/$EXPERIMENTNAME/${filename}.sh
