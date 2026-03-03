@@ -17,17 +17,6 @@ if [ -n "$1" ] && [ "$1" == "--help" ]; then
 fi
 
 source helper/config.sh
-source helper/load_modules.sh
-
-#Building runlim
-echo Building runlim...
-rm $loc_bin/runlim
-git clone https://github.com/arminbiere/runlim.git
-cd runlim
-./configure.sh && make
-cd ..
-rm -rf runlim-1.10
-echo Done building runlim
 
 #Building VeriPB
 echo Builing VeriPB..
@@ -38,4 +27,16 @@ cargo install --path .
 cp $VSC_HOME/.cargo/bin/veripb $loc_bin
 cd ..
 rm -rf VeriPB
+module unload Rust/1.91.1-GCCcore-14.2.0
 echo Done building VeriPB
+
+#Building runlim
+echo Building runlim...
+source helper/load_modules.sh
+rm $loc_bin/runlim
+git clone https://github.com/arminbiere/runlim.git
+cd runlim
+./configure.sh && make
+cd ..
+rm -rf runlim-1.10
+echo Done building runlim
