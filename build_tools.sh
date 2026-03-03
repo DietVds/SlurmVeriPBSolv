@@ -37,6 +37,7 @@ rm $loc_bin/runlim
 git clone https://github.com/arminbiere/runlim.git
 cd runlim
 ./configure.sh && make
+cp runlim $loc_bin
 cd ..
-rm -rf runlim-1.10
+rm -rf runlim
 echo Done building runlim
